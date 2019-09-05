@@ -44,9 +44,9 @@ resource "aws_s3_bucket_public_access_block" "example" {
 //}
 
 resource "aws_s3_bucket_object" "upload_directory" {
-  for_each = fileset(path.module, "bucket_objects/*")
+  for_each = fileset(path.module, "bucket_objects/**/*")
 
   bucket = aws_s3_bucket.generic_s3_bucket.id
-  key    = replace(each.value, "bucket_objects", "/")
+  key    = replace(each.value, "bucket_objects", "")
   source = each.value
 }
