@@ -10,6 +10,7 @@
 * [About The Project](#about-the-project)
 * [Prerequisites](#prerequisites)
 * [Usage : Execute the terraform scripts](#usage--execute-the-terraform-scripts)
+    * [Caveats/Notes about the upload of objects to S3 bucket](#caveatsnotes-about-the-upload-of-objects-to-s3-bucket)
 * [Inputs](#inputs)
 * [Outputs](#outputs)
 * [License](#license)
@@ -42,6 +43,12 @@ terraform apply -var "team-name=my-team-name"
 
 The `team-name` variable is optional, but highly recommended to be set as your team's name.
 If not supplied a random string is generated and used as the team-name
+
+### Caveats/Notes about the upload of objects to S3 bucket
+The Terraform scripts will upload the contents of [bucket_objects](bucket_objects) directory:
+1. This upload is recursive
+1. Changes to the content of the files will be propagated to S3
+1. File deletion is NOT propagated, so the Terraform scripts are not meant to be a replacement for AWS CLI's [`s3 sync`](https://docs.aws.amazon.com/cli/latest/reference/s3/sync.html)
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Inputs
